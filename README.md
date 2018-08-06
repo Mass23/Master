@@ -9,7 +9,9 @@ ________________________________________________________________________________
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
 
 ### 1.1 Quality control - FastQC
-####
+#### https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+
+Code: https://github.com/Mass23/Master/blob/master/fastqc.py
 
 ###	1.1 Reads trimming - Trimmomatic
 #### http://www.usadellab.org/cms/?page=trimmomatic
