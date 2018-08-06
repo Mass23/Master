@@ -27,9 +27,9 @@ Code: https://github.com/Mass23/Master/blob/master/fastqc.py
 #### http://www.usadellab.org/cms/?page=trimmomatic
 
 - Adapters trimming
-- Remove leading and trailing low quality bases (below quality 3)
-- Cut low quality 4-mer (below quality 15)
-- Drop reads below the threshold (36 here)
+- Remove leading and trailing low quality bases
+- Cut low quality 4-mer
+- Drop reads below the mnimal length threshold
 
 Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
 
