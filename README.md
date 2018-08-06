@@ -7,7 +7,7 @@ ________________________________________________________________________________
 ## 1. Pre-processing
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11165
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
-
+-----------------------------------------------------------
 ### 1.1 Quality control - FastQC
 #### https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
