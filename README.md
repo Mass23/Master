@@ -1,7 +1,15 @@
 # Master - Genomic signs of balancing selection in a socially polymorphic ant
 ### Massimo Bourquin
 ## Summary
+This pipeline processes whole-genome re-sequencing data to find signs of balancing selection in a socially polymorphic ant. The alpine silver ant (Formica selysi) can be monogynous (M) as well as (P) polygynous and this trait is genetically based on a social chromosome. 
 
+To find the traces of balancing selection, the following steps will be performed:
+
+1. Pre-processing of the reads to have a good quality alignment of M and P individuals reads to their resepctive reference genome
+
+2. Phylogenomic analysis using RAxML and the Twisst pipeline (topology weighting) to find genomic signs of phylogenetic discordance due to balancing selection.
+
+3. Whole-genome McDonald-Kreitman test to find genes under positive selection in both M and P lineages and the ones under balancing selection.
 
 ________________________________________________________________________________________________________________________________
 ## 1. Pre-processing
