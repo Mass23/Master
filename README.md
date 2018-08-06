@@ -11,6 +11,11 @@ ________________________________________________________________________________
 ###	1.1 Reads trimming - Trimmomatic
 #### http://www.usadellab.org/cms/?page=trimmomatic
 
+- Adapters trimming
+- Remove leading and trailing low quality bases (below quality 3)
+- Cut low quality 4-mer (below quality 15)
+- Drop reads below the threshold (36 here)
+
 Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
 
 ### 1.2 Burrow-wheeler aligner and trimming - BWA
