@@ -8,6 +8,9 @@ ________________________________________________________________________________
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11165
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
 
+### 1.1 Quality control - FastQC
+####
+
 ###	1.1 Reads trimming - Trimmomatic
 #### http://www.usadellab.org/cms/?page=trimmomatic
 
