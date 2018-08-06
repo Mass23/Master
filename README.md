@@ -11,6 +11,8 @@ ________________________________________________________________________________
 ###	1.1 Reads trimming - Trimmomatic
 #### http://www.usadellab.org/cms/?page=trimmomatic
 
+Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
+
 ### 1.2 Burrow-wheeler aligner and trimming - BWA
 #### http://bio-bwa.sourceforge.net/
 
