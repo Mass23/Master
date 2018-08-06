@@ -25,7 +25,7 @@ ________________________________________________________________________________
 ## 2. Phylogenomics
 
 ### 2.1 M and P individuals alignment - Mauve
-#### darlinglab.org/mauve/mauve.html
+#### http://darlinglab.org/mauve/mauve.html
 
 ### 2.2 SNP calling - Harvest
 #### http://harvest.readthedocs.io/en/latest/content/harvest-tools.html
