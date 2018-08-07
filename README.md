@@ -31,7 +31,7 @@ Code: https://github.com/Mass23/Master/blob/master/fastqc.sh
 - Adapters trimming
 - Remove leading and trailing low quality bases
 - Cut low quality 4-mer
-- Drop reads below the mnimal length threshold
+- Drop reads below the minimal length threshold
 
 Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
 
@@ -48,6 +48,8 @@ Code: https://github.com/Mass23/Master/blob/master/alignment.sh
 *******************************************************
 ### 1.4 Duplicates marking - Picard
 #### https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates
+
+- Marks duplicates 
 
 Code: https://github.com/Mass23/Master/blob/master/mark_duplicates.sh
 
