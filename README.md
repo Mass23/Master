@@ -43,7 +43,7 @@ Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
 - Map the reads against it
 - Output in .sam format
 
-Code: https://github.com/Mass23/Master/blob/master/alignment.sh
+Code: https://github.com/Mass23/Master/blob/master/bwa_alignment.sh
 
 *******************************************************
 ### 1.4 Duplicates marking - Picard
