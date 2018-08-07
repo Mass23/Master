@@ -11,7 +11,7 @@ To find the traces of balancing selection, the following steps will be performed
 
 3. Whole-genome McDonald-Kreitman test to find genes under positive selection in both M and P lineages and the ones under balancing selection.
 
-________________________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________
 ## 1. Pre-processing
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11165
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
@@ -58,42 +58,44 @@ Code: https://github.com/Mass23/Master/blob/master/mark_duplicates.sh
 #### https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_indels_IndelRealigner.php
 
 
-________________________________________________________________________________________________________________________________
-## 2. Phylogenomics
-
-*******************************************************
-### 2.1 M and P individuals alignment - Mauve
-#### http://darlinglab.org/mauve/mauve.html
-
-*******************************************************
-### 2.2 SNP calling - Harvest
-#### http://harvest.readthedocs.io/en/latest/content/harvest-tools.html
+______________________________________________________________________________________________________________________________
+## 2. Genomics signs of balancing selection
 *******************************************************
 
-### 2.3 Fst, LD, Tajima D, GC content sliding-window - VCFtools
-#### http://vcftools.sourceforge.net/man_latest.html
-*******************************************************
-
-### 2.4 Phylogenetic tree - RAxML
-#### https://sco.h-its.org/exelixis/software.html
-*******************************************************
-
-### 2.5 Topology weighting - Twisst
-#### https://github.com/simonhmartin/twisst
-
-________________________________________________________________________________________________________________________________
-## 3. Genomics signs of balancing selection
-*******************************************************
-
-### 3.1 Intersect alignment and annotation - Bedtools intersect
+### 2.1 Intersect alignment and annotation - Bedtools intersect
 #### http://bedtools.readthedocs.io/en/latest/content/tools/intersect.html
 *******************************************************
 
-### 3.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - Custom script
+### 2.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - Custom script
 *******************************************************
 
-### 3.3 Bayesian method for McDonald-Kreitman test - Snipre
+### 2.3 Bayesian method for McDonald-Kreitman test - Snipre
 #### https://bustamantelab.stanford.edu/lab-developed-software
 *******************************************************
+
+______________________________________________________________________________________________________________________________
+## 3. Phylogenomics
+
+*******************************************************
+### 3.1 M and P individuals alignment - Mauve
+#### http://darlinglab.org/mauve/mauve.html
+
+*******************************************************
+### 3.2 SNP calling - Harvest
+#### http://harvest.readthedocs.io/en/latest/content/harvest-tools.html
+*******************************************************
+
+### 3.3 Fst, LD, Tajima D, GC content sliding-window - VCFtools
+#### http://vcftools.sourceforge.net/man_latest.html
+*******************************************************
+
+### 3.4 Phylogenetic tree - RAxML
+#### https://sco.h-its.org/exelixis/software.html
+*******************************************************
+
+### 3.5 Topology weighting - Twisst
+#### https://github.com/simonhmartin/twisst
+
+
 
 ### 3.4 Compare M and P results - Custom script
