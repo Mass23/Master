@@ -60,6 +60,7 @@ Code: https://github.com/Mass23/Master/blob/master/mark_duplicates.sh
 
 ______________________________________________________________________________________________________________________________
 ## 2. Genomics signs of balancing selection
+
 *******************************************************
 
 ### 2.1 Intersect alignment and annotation - Bedtools intersect
