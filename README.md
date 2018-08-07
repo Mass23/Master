@@ -20,6 +20,8 @@ ________________________________________________________________________________
 ### 1.1 Quality control - FastQC
 #### https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
+- Raw reads quality control
+
 Code: https://github.com/Mass23/Master/blob/master/fastqc.sh
 
 *******************************************************
@@ -36,6 +38,10 @@ Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
 *******************************************************
 ### 1.3 Burrow-wheeler aligner and trimming - BWA
 #### http://bio-bwa.sourceforge.net/
+
+- Index the reference genome
+- Map the reads against it
+- Output in .sam format
 
 Code: https://github.com/Mass23/Master/blob/master/alignment.sh
 
