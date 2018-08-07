@@ -37,9 +37,13 @@ Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
 ### 1.3 Burrow-wheeler aligner and trimming - BWA
 #### http://bio-bwa.sourceforge.net/
 
+Code: https://github.com/Mass23/Master/blob/master/alignment.sh
+
 *******************************************************
 ### 1.4 Duplicates marking - Picard
 #### https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates
+
+Code: https://github.com/Mass23/Master/blob/master/mark_duplicates.sh
 
 *******************************************************
 ### 1.5 Indels realignment - GATK
