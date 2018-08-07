@@ -20,7 +20,7 @@ ________________________________________________________________________________
 ### 1.1 Quality control - FastQC
 #### https://www.bioinformatics.babraham.ac.uk/projects/fastqc/
 
-Code: https://github.com/Mass23/Master/blob/master/fastqc.py
+Code: https://github.com/Mass23/Master/blob/master/fastqc.sh
 
 *******************************************************
 ###	1.2 Reads trimming - Trimmomatic
