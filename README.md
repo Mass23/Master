@@ -1,5 +1,5 @@
 # Master - Genomic signs of balancing selection in a socially polymorphic ant
-### Massimo Bourquin
+#### Massimo Bourquin
 ## Summary
 This pipeline processes whole-genome re-sequencing data to find signs of balancing selection in a socially polymorphic ant. The alpine silver ant (Formica selysi) can be monogynous (M) as well as (P) polygynous and this trait is genetically based on a social chromosome. 
 
@@ -11,10 +11,18 @@ To find the traces of balancing selection, the following steps will be performed
 
 3. Whole-genome McDonald-Kreitman test to find genes under positive selection in both M and P lineages and the ones under balancing selection.
 
+
 ______________________________________________________________________________________________________________________________
 ## 1. Pre-processing
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11165
 #### https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145
+
+- Raw reads quality control
+- Trim the adapters
+- Map the reads to their respective (M or P) reference genome
+- Mark duplicates
+- Realign indels
+- Get a clean sam file for M and one for P to use in the analyses
 
 *******************************************************
 ### 1.1 Quality control - FastQC
@@ -61,6 +69,11 @@ Code: https://github.com/Mass23/Master/blob/master/mark_duplicates.sh
 ______________________________________________________________________________________________________________________________
 ## 2. Genomics signs of balancing selection
 
+- Use the annotation to extract the coding regions of the genome from the alignment
+- Calculate the dN, dS, pN, Ps and other metrics needed by Snipre to find genes under positive selection
+- Create the Snipre input file and launch the r code
+- Compare the results to find genes under positive selection only in M or only in P to find loci under balancing selection
+
 *******************************************************
 
 ### 2.1 Intersect alignment and annotation - Bedtools intersect
@@ -72,6 +85,9 @@ ________________________________________________________________________________
 
 ### 2.3 Bayesian method for McDonald-Kreitman test - Snipre
 #### https://bustamantelab.stanford.edu/lab-developed-software
+
+*******************************************************
+### 2.4 Compare M and P results - Custom script
 
 
 ______________________________________________________________________________________________________________________________
@@ -97,6 +113,3 @@ ________________________________________________________________________________
 ### 3.5 Topology weighting - Twisst
 #### https://github.com/simonhmartin/twisst
 
-
-
-### 3.4 Compare M and P results - Custom script
