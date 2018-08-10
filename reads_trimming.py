@@ -18,7 +18,7 @@ def treat_individual(individual, M_or_P):
         R1 = "R1_" + seq + ".fastq.gz"
         R2 = "R2_" + seq + ".fastq.gz"
 
-        output = M_or_P + "_" + individual + seq + "_" + "_trim_"
+        output = M_or_P + "_" + individual + "_" + seq + "_trim_"
 
         subprocess.call("java -jar trimmomatic-0.35.jar PE -phred33 " 
                         + "input_forward.fastq.gz " #TO CHANGE
