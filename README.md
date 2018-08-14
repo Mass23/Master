@@ -7,9 +7,10 @@ To find the traces of balancing selection, the following steps will be performed
 
 1. Pre-processing of the reads to have a good quality alignment of M and P individuals reads to their resepctive reference genome
 
-2. Phylogenomic analysis using RAxML and the Twisst pipeline (topology weighting) to find genomic signs of phylogenetic discordance due to balancing selection.
 
-3. Whole-genome McDonald-Kreitman test to find genes under positive selection in both M and P lineages and the ones under balancing selection.
+2. Whole-genome McDonald-Kreitman test to find genes under positive selection in both M and P lineages and the ones under balancing selection.
+
+3. Phylogenomic analysis using RAxML and the Twisst pipeline (topology weighting) to find genomic signs of phylogenetic discordance due to balancing selection.
 
 
 ______________________________________________________________________________________________________________________________
