@@ -41,7 +41,7 @@ Code: https://github.com/Mass23/Master/blob/master/fastqc.sh
 - Cut low quality 4-mer
 - Drop reads below the minimal length threshold
 
-Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sh
+Code: https://github.com/Mass23/Master/blob/master/reads_trimming.sy
 
 *******************************************************
 ### 1.3 Burrow-wheeler aligner and trimming - BWA
