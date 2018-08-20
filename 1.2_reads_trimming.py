@@ -1,42 +1,47 @@
 # A script that processes alle the fastq files in a directory with trimmomatic.
+
 # LEADING = removes the leading bases under the threshold
 # TRAILING = removes the trailing bases under the threshold
 # MINLEN = drops the reads shorter than the threshold
 # SLIDINGWINDOW = removes the k-mers under a quality threshold
-import os
-#import subprocess
-import glob
 
-# List all the fastq files:
-print(os.getcwd())
-M = os.getcwd() + os.sep + "M" + os.sep 
-P = os.getcwd() + os.sep + "P" + os.sep 
+def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen):
+    import os
+    import subprocess
+    import glob
 
-fastq_list = []
+    fastqlist = glob.glob("*/*/*.fastq.gz")
+    print(fastqlist)
+        
+    for fastqfile in fastqlist:
+        print(fastqfile, " in process...")
 
-# Process all the files in the list and group them by pairs:
-def process_individuals(dirMP):
-    for i in os.walk(dirMP):
-        fastq_list.append(i)
-    
-    for fastq_file in fastq_list:
+        if "_R1_" in fastqfile:
+            r1dir = fastqfile
+            r2dir = r1dir.replace("R1", "R2")
+                    
+        elif "_R2_" in fastqfile:
+            r2dir = fastqfile
+            r1dir = r2dir.replace("R2", "R1")
 
-        if fastq_file.endswith(".fastq.gz"):
+        no_paired = r1dir.replace("_R1", "")
 
-            file_dir = str(dirMP) + "/" + fastq_file
+        args = ["trimmomatic", "PE", "-phred33",
+        # Input R1, R2
+        r1dir, r2dir,
+        # Output
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "forward_paired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "forward_unpaired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "reverse_paired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "reverse_unpaired.fq.gz",
+        "LEADING:" + str(leading),
+        "TRAILING:" + str(trailing),
+        "SLIDINGWINDOW:" + str(slidingwindow1) + ":" + str(slidingwindow2),
+        "MINLEN:" + str(minlen)  
+        ]
+        subprocess.call(" ".join(args))
 
-            if "R1" in file_dir:
-                r1_dir = file_dir
-                r2_dir = r1_dir.replace("R1", "R2")
-            
-            elif "R2" in file_dir:
-                r2_dir = file_dir
-                r1_dir = r2_dir.replace("R2", "R1")
-            
-            fastq_list.remove(r1_dir)
-            fastq_list.remove(r2_dir)
+        fastqlist.remove(r1dir)
+        fastqlist.remove(r2dir)
 
-            print(r1_dir, r2_dir)
-
-process_individuals(M)
-process_individuals(P)
+trimmomatic_paired(3, 3, 4, 15, 36)
