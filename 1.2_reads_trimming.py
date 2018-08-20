@@ -30,15 +30,15 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
         # Input R1, R2
         r1dir, r2dir,
         # Output
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "forward_paired.fq.gz",
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "forward_unpaired.fq.gz",
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "reverse_paired.fq.gz",
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "reverse_unpaired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_forward_paired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_forward_unpaired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_reverse_paired.fq.gz",
+        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_reverse_unpaired.fq.gz",
         "LEADING:" + str(leading),
         "TRAILING:" + str(trailing),
         "SLIDINGWINDOW:" + str(slidingwindow1) + ":" + str(slidingwindow2),
-        "MINLEN:" + str(minlen)  
-        ]
+        "MINLEN:" + str(minlen)]
+
         subprocess.call(" ".join(args))
 
         fastqlist.remove(r1dir)
