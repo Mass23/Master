@@ -1,42 +1,42 @@
-# LEADING: removes the leading bases under the threshold
-# TRAILING: removes the trailing bases under the threshold
-# MINLEN: drops the reads shorter than the threshold
-# SLIDINGWINDOW: removes the k-mers under a quality threshold
+# A script that processes alle the fastq files in a directory with trimmomatic.
+# LEADING = removes the leading bases under the threshold
+# TRAILING = removes the trailing bases under the threshold
+# MINLEN = drops the reads shorter than the threshold
+# SLIDINGWINDOW = removes the k-mers under a quality threshold
 import os
-import subprocess
+#import subprocess
+import glob
 
-def treat_individual(individual, M_or_P):
-    dir_1 = os.chdir(M_or_P + os.path.sep + individual + os.path.sep)
-    fastq_files = os.listdir(dir_1)
-    individual = set()
+# List all the fastq files:
+print(os.getcwd())
+M = os.getcwd() + os.sep + "M" + os.sep 
+P = os.getcwd() + os.sep + "P" + os.sep 
 
-    for i in fastq_files:
-        i = i.split("." or "_")
-        i[4].add(individual)
+fastq_list = []
+
+# Process all the files in the list and group them by pairs:
+def process_individuals(dirMP):
+    for i in os.walk(dirMP):
+        fastq_list.append(i)
     
-    for seq in individual:
-        R1 = "R1_" + seq + ".fastq.gz"
-        R2 = "R2_" + seq + ".fastq.gz"
+    for fastq_file in fastq_list:
 
-        output = M_or_P + "_" + individual + "_" + seq + "_trim_"
+        if fastq_file.endswith(".fastq.gz"):
 
-        subprocess.call("java -jar trimmomatic-0.35.jar PE -phred33 " 
-                        + "input_forward.fastq.gz " #TO CHANGE
-                        + "input_reverse.fastq.gz " #TO CHANGE
-                        + output + "forward_paired.fastq.gz " 
-                        + output + "forward_unpaired.fastq.gz " 
-                        + output + "reverse_paired.fastq.gz " 
-                        + output + "reverse_unpaired.fastq.gz " 
-                        + "ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36")
+            file_dir = str(dirMP) + "/" + fastq_file
 
-individual_M_list = os.listdir("/M")
+            if "R1" in file_dir:
+                r1_dir = file_dir
+                r2_dir = r1_dir.replace("R1", "R2")
+            
+            elif "R2" in file_dir:
+                r2_dir = file_dir
+                r1_dir = r2_dir.replace("R2", "R1")
+            
+            fastq_list.remove(r1_dir)
+            fastq_list.remove(r2_dir)
 
-individual_P_list = os.listdir("/P")
+            print(r1_dir, r2_dir)
 
-for i in individual_M_list:
-    treat_individual(i, "M")
-
-for i in individual_P_list:
-    treat_individual(i, "P")
-
-print("Trimming done!")
+process_individuals(M)
+process_individuals(P)
