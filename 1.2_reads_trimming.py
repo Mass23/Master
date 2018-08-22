@@ -28,7 +28,7 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
 
         no_paired = r1id.replace("_R1", "")
 
-        args = ["trimmomatic", "PE", "-threads 2", "-phred64",
+        args = ["trimmomatic", "PE", "-threads 2", "-phred33",
         # Input R1, R2
         r1id + ".fastaq.gz", r2id + ".fastaq.gz",
         # Output forward/reverse, paired/unpaired
