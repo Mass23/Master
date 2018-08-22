@@ -6,15 +6,13 @@
 # SLIDINGWINDOW = removes the k-mers under a quality threshold
 
 def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen):
-    import os
     import subprocess
     import glob
+    import os
 
     fastqlist = glob.glob("*/*/*.fastq.gz")
-    print(fastqlist)
         
     for fastqfile in fastqlist:
-        print(fastqfile, " in process...")
 
         if "_R1" in fastqfile:
             r1dir = fastqfile
@@ -24,25 +22,50 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
             r2dir = fastqfile
             r1dir = r2dir.replace("_R2", "_R1")
 
-        no_paired = r1dir.replace("_R1", "")
+        r1id = r1dir.split("/")[-1].replace(".fastq.gz","")
+        r2id = r2dir.split("/")[-1].replace(".fastq.gz","")
+        curr_dir = "/".join(r1dir.split("/")[:-1])
 
-        args = ["trimmomatic", "PE", "-phred33",
+        no_paired = r1id.replace("_R1", "")
+        no_paired = no_paired.split("_")[0] + "_" + no_paired.split("_")[2] + "_" + no_paired.split("_")[3]
+
+        args = ["trimmomatic", "PE", "-threads 2", "-phred64",
         # Input R1, R2
-        "/" + r1dir, "/" + r2dir,
+        r1id + ".fastaq.gz", r2id + ".fastaq.gz",
         # Output forward/reverse, paired/unpaired
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_forward_paired.fastq.gz",
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_forward_unpaired.fastq.gz",
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_reverse_paired.fastq.gz",
-        "/trimmed_reads/" + no_paired.replace(".fastq.gz", "") + "_reverse_unpaired.fastq.gz",
+        no_paired + "_forward_paired.fq.gz",
+        no_paired + "_forward_unpaired.fq.gz",
+        no_paired + "_reverse_paired.fq.gz",
+        no_paired + "_reverse_unpaired.fq.gz",
         "ILLUMINACLIP:TruSeq3-PE.fa:2:30:10",
         "LEADING:" + str(leading),
         "TRAILING:" + str(trailing),
         "SLIDINGWINDOW:" + str(slidingwindow1) + ":" + str(slidingwindow2),
         "MINLEN:" + str(minlen)]
 
-        subprocess.run(" ".join(args))
+        subprocess.call(" ".join(args), shell = True)
+        print(no_paired, " done!")
 
-        fastqlist.remove(r1dir)
-        fastqlist.remove(r2dir)
+def bwa(folder):
+    import glob
+    import subprocess
+
+    mdir = "trimmed_reads/M"
+    pdir = "trimmed_reads/P"
+
+    mref = "trimmed_reads/M/fsel_M.fasta"
+    pref = "trimmed_reads/P/fsel_P.fasta"
+
+    subprocess.call("bwa index " + mref)
+    subprocess.call("bwa index " + pref)
+
+
+    mlist = [i for i in glob.glob(mdir) if i != mref]
+    plist = [i for i in glob.glob(pdir) if i != pref]
+
+    subprocess.call("bwa mem " + mref + " " + " ".join(mlist) + " > m_alignment.sam")
+    subprocess.call("bwa mem " + pref + " " + " ".join(plist) + " > p_alignment.sam")
 
 trimmomatic_paired(3, 3, 4, 15, 36)
+bwa(M)
+bwa(P)
