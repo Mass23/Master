@@ -4,11 +4,11 @@
 # TRAILING = removes the trailing bases under the threshold
 # MINLEN = drops the reads shorter than the threshold
 # SLIDINGWINDOW = removes the k-mers under a quality threshold
+import os
 
 def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen):
     import subprocess
     import glob
-    import os
 
     fastqlist = glob.glob("*.fastq.gz")
         
@@ -46,3 +46,11 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
         print(no_paired, " done!")
 
 trimmomatic_paired(3, 3, 4, 15, 36)
+
+fastqlist = glob.glob("*paired.fq.gz")
+os.makedirs("trimmed_reads")
+
+for i in fastqlist:
+    os.rename(i,"trimmed_reads/" + i)
+
+
