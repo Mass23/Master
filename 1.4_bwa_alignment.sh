@@ -1,8 +1,6 @@
 #!/bin/bash
 import subprocess
 
-mlist = [i for i in glob.glob(mdir) if i != mref]
-plist = [i for i in glob.glob(pdir) if i != pref]
+file_list = [i for i in glob.glob(os.getcwd()) if i.endswith(".fq.gz")]
 
-subprocess.call("bwa mem " + mref + " " + " ".join(mlist) + " > m_alignment.sam")
-subprocess.call("bwa mem " + pref + " " + " ".join(plist) + " > p_alignment.sam")
+subprocess.call("bwa mem " + "fsel*.fasta " + " ".join(mlist) + " > alignment.sam")
