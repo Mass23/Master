@@ -1,5 +1,8 @@
 #!/bin/bash
+import subprocess
 
-bwa mem -M fsel_M.fasta s_1.txt > out.sam
+mlist = [i for i in glob.glob(mdir) if i != mref]
+plist = [i for i in glob.glob(pdir) if i != pref]
 
-bwa mem -M fsel_P.fasta s_1.txt > out.sam
+subprocess.call("bwa mem " + mref + " " + " ".join(mlist) + " > m_alignment.sam")
+subprocess.call("bwa mem " + pref + " " + " ".join(plist) + " > p_alignment.sam")
