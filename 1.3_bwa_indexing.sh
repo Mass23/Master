@@ -1,4 +1,14 @@
 #!/bin/bash
+import subprocess
 
-bwa index M/Fsel_M_v02.fasta
-bwa index P/Fsel_P.fasta
+mdir = "M/trimmed_reads"
+pdir = "P/trimmed_reads"
+
+mref = "fsel_M.fasta"
+pref = "fsel_P.fasta"
+
+os.chdir(mdir)
+subprocess.call("bwa index " + mref)
+
+os.chdir(pdir)
+subprocess.call("bwa index " + pref)
