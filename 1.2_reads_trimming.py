@@ -27,7 +27,6 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
         curr_dir = "/".join(r1dir.split("/")[:-1])
 
         no_paired = r1id.replace("_R1", "")
-        no_paired = no_paired.split("_")[0] + "_" + no_paired.split("_")[2] + "_" + no_paired.split("_")[3]
 
         args = ["trimmomatic", "PE", "-threads 2", "-phred64",
         # Input R1, R2
