@@ -10,7 +10,7 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
     import glob
     import os
 
-    fastqlist = glob.glob("*/*/*.fastq.gz")
+    fastqlist = glob.glob("*.fastq.gz")
         
     for fastqfile in fastqlist:
 
@@ -46,26 +46,4 @@ def trimmomatic_paired(leading, trailing, slidingwindow1, slidingwindow2, minlen
         subprocess.call(" ".join(args), shell = True)
         print(no_paired, " done!")
 
-def bwa(folder):
-    import glob
-    import subprocess
-
-    mdir = "trimmed_reads/M"
-    pdir = "trimmed_reads/P"
-
-    mref = "trimmed_reads/M/fsel_M.fasta"
-    pref = "trimmed_reads/P/fsel_P.fasta"
-
-    subprocess.call("bwa index " + mref)
-    subprocess.call("bwa index " + pref)
-
-
-    mlist = [i for i in glob.glob(mdir) if i != mref]
-    plist = [i for i in glob.glob(pdir) if i != pref]
-
-    subprocess.call("bwa mem " + mref + " " + " ".join(mlist) + " > m_alignment.sam")
-    subprocess.call("bwa mem " + pref + " " + " ".join(plist) + " > p_alignment.sam")
-
 trimmomatic_paired(3, 3, 4, 15, 36)
-bwa(M)
-bwa(P)
