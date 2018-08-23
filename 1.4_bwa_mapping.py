@@ -1,21 +1,24 @@
 #!/bin/bash
-import subprocess
-import os
 
-files = [f for f in os.listdir(os.getcwd()) if f.endswith("_paired.fq.gz")]
+def bwa_map(ref):
+    import subprocess
+    import os
 
-individuals_set = set()
+    files = [f for f in os.listdir(os.getcwd()) if f.endswith("_paired.fq.gz")]
 
-for i in files:
-    name = i.split("_")[0]
-    individuals_set.add(name)
+    individuals_set = set()
 
-for individual in individuals_set:
-    args_forward = ["cat", individual + "*forward_paired.fq.gz", ">", individual + "_forward.fastq.gz"]
-    args_reverse = ["cat", individual + "*reverse_paired.fq.gz", ">", individual + "_reverse.fastq.gz"]
-    subprocess.call(" ".join(args_forward), shell = True)
-    subprocess.call(" ".join(args_reverse), shell = True)
+    for i in files:
+        name = i.split("_")[0]
+        individuals_set.add(name)
 
-    map_args = ["bwa", "mem", "fsel*.fasta", individual + "_forward.fastq.gz", individual + "_reverse.fastq.gz", ">", individual + "_alignment.sam"]
-    subprocess.call(" ".join(map_args), shell = True)
+    for individual in individuals_set:
+        args_forward = ["cat", individual + "*forward_paired.fq.gz", ">", individual + "_forward.fastq.gz"]
+        args_reverse = ["cat", individual + "*reverse_paired.fq.gz", ">", individual + "_reverse.fastq.gz"]
+        subprocess.call(" ".join(args_forward), shell = True)
+        subprocess.call(" ".join(args_reverse), shell = True)
 
+        map_args = ["bwa", "mem", ref, individual + "_forward.fastq.gz", individual + "_reverse.fastq.gz", ">", individual + "_alignment.sam"]
+        subprocess.call(" ".join(map_args), shell = True)
+
+bwa_map("fsel_M.fasta")
