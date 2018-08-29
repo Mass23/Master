@@ -18,7 +18,7 @@ def bwa_map(ref):
         subprocess.call(" ".join(args_forward), shell = True)
         subprocess.call(" ".join(args_reverse), shell = True)
 
-        map_args = ["bwa", "mem", "-M", "-R", "@RG\tID:" + individual + "\t",ref, individual + "_forward.fastq.gz", individual + "_reverse.fastq.gz", ">", individual + "_alignment.sam"]
+        map_args = ["bwa", "mem", "-M", "-R", "@RG\tID:" + individual + "\tLB:" + individual + "\t",ref, individual + "_forward.fastq.gz", individual + "_reverse.fastq.gz", ">", individual + "_alignment.sam"]
         subprocess.call(" ".join(map_args), shell = True)
 
 bwa_map("fsel_M.fasta")
