@@ -11,7 +11,7 @@ def custom_division(number1, number2):
     try:
         out = float(number1 / number2)
     except:
-        out = "Na"
+        out = "nan"
     return(out)
 
 
