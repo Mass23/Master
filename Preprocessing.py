@@ -92,7 +92,7 @@ def preprocess(fastqfile, ref):
 
     individual = fastqfile.split('_')[0]
 
-    # 2.1 trimming - TO CORRECT INPUT
+    # 2.1 trimming
     trimmomatic(fastqfile, individual)
 
     # 2.2 mapping
