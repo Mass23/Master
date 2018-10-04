@@ -29,4 +29,3 @@ for ind in individuals:
     # Create fasta files
     args_2fasta = ['samtools', 'bam2fq', ind + '_realigned.bam', '|', 'seqtk', 'seq', '-A', '-', '>', ind + '.fasta']
     subprocess.call(' '.join(args_2fasta), shell = True)
-
