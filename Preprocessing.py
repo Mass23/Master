@@ -4,23 +4,6 @@ import glob
 import multiprocessing
 import sys
 
-# Arguments: python3 preprocessing.py individual reference core_nb
-args = sys.argv
-individual = args[1]
-ref = args[2]
-cores = str(args[3])
-
-print("Individual: ", individual)
-print("Reference: ", ref)
-
-# Create needed indexes
-subprocess.call('bwa index ' + ref, shell = True)
-subprocess.call('picard-tools CreateSequenceDictionary MAX_RECORDS_IN_RAM=null R=' + ref + ' O=' + ref.split('.')[0] + '.dict', shell = True)
-subprocess.call('samtools faidx ' + ref, shell = True)
-
-fastq_list = glob.glob(individual + '*.fastq.gz')
-fastqfile = fastq_list[0]
-
 def trimmomatic(fastqfile, individual, cores):
     r1 = ''
     r2 = ''
@@ -33,7 +16,7 @@ def trimmomatic(fastqfile, individual, cores):
         r2 = fastqfile
         r1 = r2.replace("_R2", "_R1")
 
-    args = ["trimmomatic", "PE", "-threads",  cores, "-phred33",
+    trim_args = ["trimmomatic", "PE", "-threads",  cores, "-phred33",
             # Input R1, R2
             r1 , r2,
             # Output forward/reverse, paired/unpaired
@@ -47,7 +30,7 @@ def trimmomatic(fastqfile, individual, cores):
             "SLIDINGWINDOW:4:15",
             "MINLEN:36"]
 
-    subprocess.call(' '.join(args), shell = True)
+    subprocess.call(' '.join(trim_args), shell = True)
 
 
 def bwa_map(individual, ref, cores):
@@ -81,6 +64,7 @@ def picard_dedup(individual):
 
 def realign_indels(individual, ref):
 
+
     # Index bam
     args_index = ['samtools', 'index', individual + '_dedup.bam']
     subprocess.call(' '.join(args_index), shell = True)
@@ -88,17 +72,32 @@ def realign_indels(individual, ref):
     # Intervals
     intervals = ['GenomeAnalysisTK', '-T', 'RealignerTargetCreator', '-R', ref, '-I', individual + '_dedup.bam', '-o', individual + 'forIndelRealigner.intervals']
     subprocess.call(' '.join(intervals), shell = True)
- 
+
     # Realign indels
     realign = ['GenomeAnalysisTK', '-T', 'IndelRealigner', '-R', ref, '-I', individual + '_dedup.bam', '-targetIntervals', individual + 'forIndelRealigner.intervals', '-o', individual + '_realigned.bam']
-    subprocess.call(' '.join(realign), shell = True) 
-
+    subprocess.call(' '.join(realign), shell = True)
 
 def snp_call(individual):
     args_call = ['gatk', 'HaplotypeCaller', '-R', 'fsel_M.fasta', '-I', individual + '_realigned.bam', '-ERC', 'GVCF', '-o', individual + '.g.vcf']
     subprocess.call(' '.join(args_call))
 
+################################################################
+# 1. Index genome, list files
+args = sys.argv
+individual = args[1]
+ref = args[2]
+cores = str(args[3])
+print("Individual: ", individual)
+print("Reference: ", ref)
+subprocess.call('bwa index ' + ref, shell = True)
+subprocess.call('picard-tools CreateSequenceDictionary MAX_RECORDS_IN_RAM=null R=' + ref + ' O=' + ref.split('.')[0] + '.dict', shell = True)
+subprocess.call('samtools faidx ' + ref, shell = True)
 
+fastq_list = glob.glob(individual + '*.fastq.gz')
+
+fastqfile = fastq_list[0]
+
+################################################################
 def preprocess(fastqfile, ref, cores):
 
     individual = fastqfile.split('_')[0]
@@ -118,13 +117,15 @@ def preprocess(fastqfile, ref, cores):
     picard_dedup(individual)
     print("Duplicates marked!")
 
-    print("Calling variants...")
-    snp_call(individual)
-    print("Variants called!")
-
+    # 2.4 Realign indels
     print("Realignind indels...")
     realign_indels(individual, ref)
     print("Realignment done!")
+    
+    # 2.5 Call Variants into separate GVCF files
+    print("Calling variants...")
+    snp_call(individual)
+    print("Variants called!")
 
     print("Preprocessing done!")
 
