@@ -1,5 +1,6 @@
-# Tested individuals fasta files finish with *1.fa and *2.fa corresponding to the haplotypes
-# Outgroup sequence finishes with *A.fa
+# Tested individuals fasta files finish with *_transcripts1.fa and *_transcripts2.fa corresponding to the two haplotypes
+# Outgroup sequence finishes with *_transcriptsA.fa
+# The program automatically takes all the fasta files corresponding to these criterias in the directory, max one outgroup allowed!
 import glob
 from Bio import SeqIO
 
