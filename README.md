@@ -71,8 +71,8 @@ ________________________________________________________________________________
 
 *******************************************************
 
-### 2.1 Intersect alignment and annotation - Bedtools intersect
-#### http://bedtools.readthedocs.io/en/latest/content/tools/intersect.html
+### 2.1 Create individuals fasta and extract annotation
+#### http://ccb.jhu.edu/software/stringtie/gff.shtml
 *******************************************************
 
 ### 2.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - Custom script
