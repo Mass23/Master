@@ -62,12 +62,12 @@ ________________________________________________________________________________
 ### 1.7 Variant filtration BCFtools filter
 #### https://samtools.github.io/bcftools/bcftools.html
 ______________________________________________________________________________________________________________________________
-## 2. Genomics signs of balancing selection
+## 2. Positive selection inferences
 
 - Use the annotation to extract the coding regions of the genome from the alignment
 - Calculate the dN, dS, pN, Ps and other metrics needed by Snipre to find genes under positive selection
 - Create the Snipre input file and launch the r code
-- Compare the results to find genes under positive selection only in M or only in P to find loci under balancing selection
+- Compare the results to find genes under positive selection only in M or only in P
 
 *******************************************************
 
