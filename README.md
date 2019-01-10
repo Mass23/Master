@@ -1,14 +1,15 @@
 # Master - Balancing selection on a supergene controlling social organisation in the ant Formica selysi
 #### Massimo Bourquin
 ## Summary
-This pipeline processes whole-genome re-sequencing data to find signs of balancing selection in a socially polymorphic ant. The alpine silver ant (Formica selysi) can be monogynous (M) as well as (P) polygynous and this trait is genetically based on a social chromosome. 
+This pipeline processes whole-genome re-sequencing data to find signs of balancing selection in a socially polymorphic ant. The alpine silver ant (Formica selysi) can be monogynous (Sm allele) as well as polygynous (Sp allele) and this trait is genetically based on a supergene.
 
-To find the traces of balancing selection, the following steps will be performed:
+To find the signs of balancing selection, the following steps will be performed:
 
-1. Pre-processing of the reads to have a good quality alignment of M and P individuals reads to their resepctive reference genome
+1. Pre-processing of the reads to have a good quality alignment of Sm/Sm and Sp/Sp individuals reads to the reference genome
 
+2. Tajima's D analysis
 
-2. Whole-genome McDonald-Kreitman test to find genes under positive selection in both M and P lineages and the ones under balancing selection.
+3. Whole-genome McDonald-Kreitman test to find genes under positive selection in both Sm and Sp
 
 ______________________________________________________________________________________________________________________________
 ## 1. Pre-processing
@@ -62,7 +63,7 @@ ________________________________________________________________________________
 ### 1.7 Variant filtration BCFtools filter
 #### https://samtools.github.io/bcftools/bcftools.html
 ______________________________________________________________________________________________________________________________
-## 2. Positive selection inferences
+## 3. Positive selection inferences
 
 - Use the annotation to extract the coding regions of the genome from the alignment
 - Calculate the dN, dS, pN, Ps and other metrics needed by Snipre to find genes under positive selection
@@ -71,14 +72,14 @@ ________________________________________________________________________________
 
 *******************************************************
 
-### 2.1 Create individuals fasta and extract annotation
+### 3.1 Create individuals fasta and extract annotation
 #### http://ccb.jhu.edu/software/stringtie/gff.shtml
 *******************************************************
 
-### 2.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - Custom script
+### 3.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - Custom script
 *******************************************************
 
-### 2.3 Bayesian method for McDonald-Kreitman test - Snipre
+### 3.3 Bayesian method for McDonald-Kreitman test - Snipre
 #### https://bustamantelab.stanford.edu/lab-developed-software
 
 
