@@ -1,4 +1,4 @@
-# Master - Genomic signs of balancing selection in a socially polymorphic ant
+# Master - Balancing selection on a supergene controlling social organisation in the ant Formica selysi
 #### Massimo Bourquin
 ## Summary
 This pipeline processes whole-genome re-sequencing data to find signs of balancing selection in a socially polymorphic ant. The alpine silver ant (Formica selysi) can be monogynous (M) as well as (P) polygynous and this trait is genetically based on a social chromosome. 
