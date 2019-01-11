@@ -1,5 +1,5 @@
 # Tested individuals fasta files finish with *_transcripts1.fa and *_transcripts2.fa corresponding to the two haplotypes
-# Outgroup sequence finishes with *_transcriptsA.fa
+# Outgroup sequence finishes with *_transcriptsO.fa
 # The program automatically takes all the fasta files corresponding to these criterias in the directory, max one outgroup allowed!
 import glob
 from Bio import SeqIO
@@ -130,7 +130,7 @@ def process_genes(individuals_list, gene_dict, outgroup_dict):
             continue
 
 # Create outgroup dictionary
-outgroup = glob.glob('*_transcriptsA.fa')[0]
+outgroup = glob.glob('*_transcriptsO.fa')[0]
 outgroup_dict = {}
 
 for index, gene in enumerate(SeqIO.parse(open(outgroup), 'fasta')):
