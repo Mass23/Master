@@ -4,19 +4,6 @@
 import glob
 from Bio import SeqIO
 
-class results:
-    def __init__(self, pr, fr, ps, fs, tsil, trep, sample_size, identity,length,ncount):
-        self.pr = pr
-        self.fr = fr
-        self.ps = ps
-        self.fs = fs
-        self.tsil = tsil
-        self.trep = trep
-        self.sample_size = sample_size
-        self.identity = identity
-        self.length = length
-        self.ncount = ncount
-
 def get_amino_acid(codon):
     """ A function that returns the amino acid corresponding to a codon."""
 
@@ -147,30 +134,26 @@ outgroup = glob.glob('*_transcriptsA.fa')[0]
 outgroup_dict = {}
 
 for index, gene in enumerate(SeqIO.parse(open(outgroup), 'fasta')):
-    if len(str(gene.seq)) // 3 == len(str(gene.seq)) / 3:
+    gene_name = str(gene.id.replace('-RA','').replace('-RB','').replace('-RC','').replace('-RD','').replace('-RE','').replace('-RF','').replace('-RG','').replace('-RH','').replace('-RI','').replace('-RJ','').replace('-RK','').replace('-RL',''))
 
-        gene_name = str(gene.id.replace('-RA','').replace('-RB','').replace('-RC','').replace('-RD','').replace('-RE','').replace('-RF','').replace('-RG','').replace('-RH','').replace('-RI','').replace('-RJ','').replace('-RK','').replace('-RL',''))
+    other_transcripts = [i for i in outgroup_dict.keys() if i.startswith(gene_name)]
 
-        other_transcripts = [i for i in outgroup_dict.keys() if i.startswith(gene_name)]
+    try:
+        last_length = len(outgroup_dict[other_transcripts[0]])
+    except:
+        last_length = 0
 
-        try:
-            last_length = len(outgroup_dict[other_transcripts[0]])
-        except:
-            last_length = 0
-
-        if last_length > len(gene.seq):
-            continue
-        elif last_length == len(gene.seq):
-            continue
-        else:
-
-            for k in list(outgroup_dict.keys()):
-                if k.startswith(gene_name):
-                    outgroup_dict.pop(k)
-
-            outgroup_dict[gene.id] = str(gene.seq)
-    else:
+    if last_length > len(gene.seq):
         continue
+    elif last_length == len(gene.seq):
+        continue
+    else:
+
+        for k in list(outgroup_dict.keys()):
+            if k.startswith(gene_name):
+                outgroup_dict.pop(k)
+
+        outgroup_dict[gene.id] = str(gene.seq)
 
 # Create individuals dictionaries
 individual_files = list(glob.glob('*_transcripts1.fa')) + list(glob.glob('*_transcripts2.fa'))
@@ -181,14 +164,11 @@ for individual in individual_files:
     individual_name = individual.replace('_transcripts1.fa','_1').replace('_transcripts2.fa','_2')
 
     for index, gene in enumerate(SeqIO.parse(open(individual), 'fasta')):
-        if len(str(gene.seq)) // 3 == len(str(gene.seq)) / 3:
-            if individual_name in gene_dict.keys():
-                gene_dict[individual_name][gene.id] = str(gene.seq)
-            else:
-                gene_dict[individual_name] = dict()
-                gene_dict[individual_name][gene.id] = str(gene.seq)
+        if individual_name in gene_dict.keys():
+            gene_dict[individual_name][gene.id] = str(gene.seq)
         else:
-            continue
+             gene_dict[individual_name] = dict()
+             gene_dict[individual_name][gene.id] = str(gene.seq)
 
 print('Outgroup: ', outgroup.replace('_transcripts1.fa',''), ' - ', len(outgroup_dict.keys()), ' genes')
 for individual in gene_dict.keys():
@@ -319,10 +299,6 @@ with open('snipre_input.csv', 'w') as output:
                 print('individuals:')
                 print(individuals_codons, individuals_amino_acids)
 
-        try:
-            raw_mkr = (dn / ds) / (pn / ps)
-        except:
-            raw_mkr = 'NA'
         # Get summary stats
         output.write('\t'.join([str(gene),str(pn),str(dn),str(ps),str(ds),str(tsil),str(trepl),str(nout),str(npop)]) + '\n')
     
