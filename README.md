@@ -80,7 +80,7 @@ ________________________________________________________________________________
 #### http://ccb.jhu.edu/software/stringtie/gff.shtml
 *******************************************************
 
-### 3.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - Custom script
+### 3.2 Calculate the dN, dS, pN, pS for each gene (Snipre input) - fasta2snipre.py
 *******************************************************
 
 ### 3.3 Bayesian method for McDonald-Kreitman test - Snipre
