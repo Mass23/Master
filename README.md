@@ -87,7 +87,7 @@ ________________________________________________________________________________
 #### https://bustamantelab.stanford.edu/lab-developed-software
 
 *******************************************************
-### 3.4 Ontology term analysis - Fisher exact test - Custom script
+### 3.4 Ontology term analysis - Fisher exact test - OG_fisher.py
 
 
 
