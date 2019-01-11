@@ -7,7 +7,7 @@ To find the signs of balancing selection, the following steps will be performed:
 
 1. Pre-processing of the reads to have a good quality alignment of Sm/Sm and Sp/Sp individuals reads to the reference genome
 
-2. Tajima's D analysis
+2. Fst / Diversity / Tajima's D analysis
 
 3. Whole-genome McDonald-Kreitman test to find genes under positive selection in both Sm and Sp
 
@@ -63,6 +63,10 @@ ________________________________________________________________________________
 ### 1.7 Variant filtration BCFtools filter
 #### https://samtools.github.io/bcftools/bcftools.html
 ______________________________________________________________________________________________________________________________
+## 2. Fst / Diversity / Tajima's D analysis
+### https://vcftools.github.io/index.html
+
+______________________________________________________________________________________________________________________________
 ## 3. Positive selection inferences
 
 - Use the annotation to extract the coding regions of the genome from the alignment
@@ -81,5 +85,9 @@ ________________________________________________________________________________
 
 ### 3.3 Bayesian method for McDonald-Kreitman test - Snipre
 #### https://bustamantelab.stanford.edu/lab-developed-software
+
+*******************************************************
+### 3.4 Ontology term analysis - Fisher exact test - Custom script
+
 
 
