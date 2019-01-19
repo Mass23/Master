@@ -94,41 +94,6 @@ def get_amino_acid(codon):
 
     return(codon_table[codon])
 
-def process_genes(individuals_list, gene_dict, outgroup_dict):
-
-    gene_list = outgroup_dict.keys()
-    results_dict = {}
-
-    for gene in gene_list:
-
-        gene_length = len(outgroup_dict[gene])
-
-        for codon in range(0,gene_length,3):
-
-            pos1 = codon
-            pos2 = codon + 1
-            pos3 = codon + 2
-
-            outgroup_codon = outgroup_dict[gene][pos1] + outgroup_dict[gene][pos2] + outgroup_dict[gene][pos3]
-            outgroup_amino_acid = get_amino_acid(outgroup_codon)
-
-            population_codons = set()
-            population_amino_acids = set()
-
-            for individual in individuals_list:
-                individual_codon = gene_dict[individual][gene][pos1] + gene_dict[individual][gene][pos2] + gene_dict[individual][gene][pos3]
-
-                if 'N' or '*' or '-' in individual_codon:
-                    continue
-                else:
-                    population_codons.add(individual_codon)
-                    population_amino_acids.add(get_amino_acid(individual_codon))
-
-
-
-        else:
-            continue
-
 # Create outgroup dictionary
 outgroup = glob.glob('*_transcriptsO.fa')[0]
 outgroup_dict = {}
